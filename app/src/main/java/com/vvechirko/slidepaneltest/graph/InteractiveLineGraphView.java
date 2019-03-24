@@ -6,6 +6,7 @@ import android.graphics.*;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -17,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class InteractiveLineGraphView extends View {
 
-    private static final String TAG = "InteractiveLineGraphView";
+    private static final String TAG = "InteractiveGraphView";
     /**
      * The number of individual points (samples) in the chart series to draw onscreen.
      */
@@ -628,6 +629,7 @@ public class InteractiveLineGraphView extends View {
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            Log.d(TAG, "onScroll");
             // Scrolling uses math based on the viewport (as opposed to math using pixels).
             /**
              * Pixel offset is the offset in screen pixels, while viewport offset is the
@@ -675,6 +677,7 @@ public class InteractiveLineGraphView extends View {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            Log.d(TAG, "onFling");
             fling((int) -velocityX, (int) -velocityY);
             return true;
         }
@@ -731,6 +734,7 @@ public class InteractiveLineGraphView extends View {
     @Override
     public void computeScroll() {
         super.computeScroll();
+        Log.d(TAG, "computeScroll");
         boolean needsInvalidate = false;
         if (mScroller.computeScrollOffset()) {
             // The scroller isn't finished, meaning a fling or programmatic pan operation is

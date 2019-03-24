@@ -10,6 +10,9 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.OverScroller
+import androidx.dynamicanimation.animation.FlingAnimation
+import androidx.dynamicanimation.animation.FloatValueHolder
 
 class SlidingContainer @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -24,6 +27,8 @@ class SlidingContainer @JvmOverloads constructor(
     private var expandedPanelMargin = -1
 
     private var isAnimating = false
+
+    private val scroller = OverScroller(context)
 
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams) {
         super.addView(child, index, params)
@@ -74,12 +79,12 @@ class SlidingContainer @JvmOverloads constructor(
         return gestureDetector.onTouchEvent(event) || super.onTouchEvent(event)
     }
 
-    private val slop: Float = 20.0f
-
-    private var downX: Float = 0.0f
-    private var downY: Float = 0.0f
-    private var isSwiping: Boolean = false
-    private var isOpened: Boolean = false
+//    private val slop: Float = 20.0f
+//
+//    private var downX: Float = 0.0f
+//    private var downY: Float = 0.0f
+//    private var isSwiping: Boolean = false
+//    private var isOpened: Boolean = false
 
 //    private fun detectSwipe(event: MotionEvent): Boolean {
 //        when (event.actionMasked) {
@@ -112,43 +117,44 @@ class SlidingContainer @JvmOverloads constructor(
 //        return false
 //    }
 
-    private fun moveView(reverse: Boolean) {
-        if (isOpened == reverse) return // already opened/closed
-        isOpened = reverse
+//    private fun moveView(reverse: Boolean) {
+//        if (isOpened == reverse) return // already opened/closed
+//        isOpened = reverse
+//
+//        Log.d(
+//            "ValueAnimator",
+//            "expandedPanelMargin = $expandedPanelMargin, collapsedPanelMargin = $collapsedPanelMargin"
+//        )
+//        val anim = ValueAnimator.ofFloat(0.0f, 1.0f)
+//        anim.addUpdateListener {
+//            val progress = it.animatedValue as Float
+//
+//            val lp = panelView.layoutParams as LayoutParams
+//            lp.topMargin = (collapsedPanelMargin + progress * (expandedPanelMargin - collapsedPanelMargin)).toInt()
+//            Log.d("ValueAnimator", "topMargin = ${lp.topMargin}")
+//            panelView.layoutParams = lp
+//        }
+//        anim.addListener(object : Animator.AnimatorListener {
+//            override fun onAnimationRepeat(animation: Animator) {}
+//
+//            override fun onAnimationEnd(animation: Animator) {
+//                isAnimating = false
+//            }
+//
+//            override fun onAnimationCancel(animation: Animator) {}
+//
+//            override fun onAnimationStart(animation: Animator) {
+//                isAnimating = true
+//            }
+//        })
+//        if (reverse) anim.reverse() else anim.start()
+//    }
 
-        Log.d(
-            "ValueAnimator",
-            "expandedPanelMargin = $expandedPanelMargin, collapsedPanelMargin = $collapsedPanelMargin"
-        )
-        val anim = ValueAnimator.ofFloat(0.0f, 1.0f)
-        anim.addUpdateListener {
-            val progress = it.animatedValue as Float
-
-            val lp = panelView.layoutParams as LayoutParams
-            lp.topMargin = (collapsedPanelMargin + progress * (expandedPanelMargin - collapsedPanelMargin)).toInt()
-            Log.d("ValueAnimator", "topMargin = ${lp.topMargin}")
-            panelView.layoutParams = lp
-        }
-        anim.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationRepeat(animation: Animator) {}
-
-            override fun onAnimationEnd(animation: Animator) {
-                isAnimating = false
-            }
-
-            override fun onAnimationCancel(animation: Animator) {}
-
-            override fun onAnimationStart(animation: Animator) {
-                isAnimating = true
-            }
-        })
-        if (reverse) anim.reverse() else anim.start()
-    }
+    private var startMargin = 0
 
     override fun onDown(event: MotionEvent): Boolean {
         Log.d("SlidingContainer", "onDown")
-        downX = event.x
-        downY = event.y
+        startMargin = (panelView.layoutParams as MarginLayoutParams).topMargin
         return true
     }
 
@@ -166,15 +172,56 @@ class SlidingContainer @JvmOverloads constructor(
     }
 
     override fun onScroll(event1: MotionEvent, event2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
-        Log.d("SlidingContainer", "onScroll")
-        val deltaX = event1.x - downX
-        val deltaY = event1.y - downY
+        Log.d("SlidingContainer", "onScroll $distanceX, $distanceY")
+
+        val lp = panelView.layoutParams as LayoutParams
+        startMargin -= distanceY.toInt()
+        var temp = startMargin
+        if (temp > expandedPanelMargin) {
+            temp = expandedPanelMargin
+        } else if (temp < collapsedPanelMargin) {
+            temp = collapsedPanelMargin
+        }
+
+        lp.topMargin = temp
+        Log.d("SlidingContainer", "topMargin = ${lp.topMargin}")
+        panelView.layoutParams = lp
         return false
     }
 
     override fun onFling(event1: MotionEvent, event2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
-        Log.d("SlidingContainer", "onFling")
+        Log.d("SlidingContainer", "onFling $velocityX, $velocityY")
+        scroller.forceFinished(true)
+        scroller.fling(0, startMargin, velocityX.toInt(), velocityY.toInt(),
+            0, 0, collapsedPanelMargin, expandedPanelMargin)
+        postInvalidateOnAnimation()
+
+//        val flingY = FlingAnimation(FloatValueHolder(startMargin.toFloat()))
+//        flingY.setStartVelocity(velocityY)
+//            .setMinValue(collapsedPanelMargin.toFloat())  // minimum translationY property
+//            .setMaxValue(expandedPanelMargin.toFloat()) // maximum translationY property
+//            .setFriction(1.1f)
+//            .start()
+
         return true
+    }
+
+    override fun computeScroll() {
+        super.computeScroll()
+        if (scroller.computeScrollOffset()) {
+            val currX = scroller.currX
+            val currY = scroller.currY
+            if (currY == scroller.finalY) {
+                return
+            }
+            val lp = panelView.layoutParams as LayoutParams
+            lp.topMargin = currY
+            Log.d("SlidingContainer", "topMargin = ${lp.topMargin}")
+            panelView.layoutParams = lp
+            postInvalidateOnAnimation()
+
+            Log.d("SlidingContainer", "computeScroll $currX, $currY")
+        }
     }
 
     // SlidingContainer.LayoutParams
