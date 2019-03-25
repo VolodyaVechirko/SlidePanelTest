@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vvechirko.slidepaneltest.FitWindowFrameLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:fitsSystemWindows="true"
+		android:background="@android:color/holo_blue_dark"
+		android:layout_height="match_parent">
+
+	<View
+			android:layout_width="match_parent"
+			android:layout_height="200dp"
+			android:fitsSystemWindows="false"
+			android:background="@android:color/holo_orange_dark"/>
+
+</com.vvechirko.slidepaneltest.FitWindowFrameLayout>
