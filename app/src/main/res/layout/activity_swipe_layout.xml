@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			 xmlns:app="http://schemas.android.com/apk/res-auto"
+			 android:layout_width="match_parent"
+			 android:layout_height="match_parent">
+
+	<com.vvechirko.slidepaneltest.SwipeLayout
+			android:layout_width="match_parent"
+			android:layout_height="100dp"
+			app:left_swipe_enabled="false"
+			app:right_swipe_enabled="true">
+
+		<!--CENTER. app:gravity="center" - is default value -->
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:background="@android:color/holo_orange_light"
+				android:layout_height="match_parent">
+
+		</LinearLayout>
+
+		<!--RIGHT-->
+		<View
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@android:color/holo_blue_bright"
+				app:gravity="right"
+				app:bring_to_clamp="150dp"
+				app:clamp="self"
+				app:sticky="100dp">
+
+		</View>
+
+		<!--LEFT-->
+		<!--<FrameLayout-->
+				<!--android:layout_width="200dp"-->
+				<!--android:layout_height="match_parent"-->
+				<!--app:gravity="left"-->
+				<!--app:bring_to_clamp="100dp"-->
+				<!--android:background="@android:color/holo_purple"-->
+				<!--app:clamp="self"-->
+				<!--app:sticky="200dp">-->
+
+		<!--</FrameLayout>-->
+
+	</com.vvechirko.slidepaneltest.SwipeLayout>
+
+</FrameLayout>

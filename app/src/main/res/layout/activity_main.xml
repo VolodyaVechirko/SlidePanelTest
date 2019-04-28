@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vvechirko.slidepaneltest.SlidingContainer
+<LinearLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:tools="http://schemas.android.com/tools"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:padding="16dp"
 		tools:context=".MainActivity">
 
-	<TextView
+	<Button
+			android:id="@+id/btn1"
 			android:layout_width="match_parent"
-			android:layout_height="300dp"
-			android:text="Hello World!"
-			android:gravity="center"
-			app:layout_viewHeader="true"
-			android:layout_gravity="top"
-			android:background="@android:color/holo_blue_bright"/>
+			android:layout_height="wrap_content"
+			android:text="Sliding Container"/>
 
-	<androidx.cardview.widget.CardView
+	<Button
+			android:id="@+id/btn2"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_margin="16dp"
-			app:layout_viewPanel="true"
-			android:layout_gravity="bottom"
-			app:cardCornerRadius="8dp"/>
+			android:layout_height="wrap_content"
+			android:text="Graph View"/>
 
-</com.vvechirko.slidepaneltest.SlidingContainer>
+	<Button
+			android:id="@+id/btn3"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Fit window FL"/>
+
+	<Button
+			android:id="@+id/btn4"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Swipe Layout"/>
+
+	<Button
+			android:id="@+id/btn5"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="App Bar Layout"/>
+
+</LinearLayout>

@@ -14,4 +14,9 @@
 
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="Widget.Design.AppBarLayout" parent="android:Widget">
+        <item name="elevation">4dp</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
 </resources>

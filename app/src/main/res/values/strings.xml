@@ -7,4 +7,19 @@
 	<string name="action_pan_right">Demo pan right</string>
 	<string name="action_pan_up">Demo pan up</string>
 	<string name="action_pan_down">Demo pan down</string>
+
+	<string name="app_bap_scrolling_view_behaviour">com.vvechirko.slidepaneltest.appbar.AppBarLayout$ScrollingViewBehavior</string>
+	<string name="app_bap_behaviour">com.vvechirko.slidepaneltest.appbar.AppBarLayout$Behavior</string>
+
+	<string name="lorem">
+		A common form of lorem ipsum reads:
+
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+		Another common example of Lorem ipsum dummy text explaining its origins:
+
+		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+		It is not a very common dummy text compared to the original, with 3.65 million occurrences as of October 2018 compared to 119 million for the pseudo-Latin text.
+	</string>
 </resources>
