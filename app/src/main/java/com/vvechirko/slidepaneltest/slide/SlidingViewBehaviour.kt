@@ -22,8 +22,7 @@ class SlidingViewBehaviour<V : View> : CoordinatorLayout.Behavior<V> {
     constructor() {}
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         val a = context.obtainStyledAttributes(attrs, R.styleable.SlidingViewBehavior_Params)
-        overlapView =
-            a.getResourceId(R.styleable.SlidingViewBehavior_Params_behavior_overlapView, View.NO_ID)
+        overlapView = a.getResourceId(R.styleable.SlidingViewBehavior_Params_behavior_overlapView, View.NO_ID)
         a.recycle()
     }
 

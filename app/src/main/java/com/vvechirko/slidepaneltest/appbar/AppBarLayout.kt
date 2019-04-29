@@ -65,8 +65,8 @@ class AppBarLayout @JvmOverloads constructor(
 
     init {
         orientation = VERTICAL
-        val a = context.obtainStyledAttributes(attrs, R.styleable.AppBarLayout, 0, R.style.Widget_Design_AppBarLayout)
-        targetElevation = a.getDimensionPixelSize(R.styleable.AppBarLayout_elevation, 0).toFloat()
+        val a = context.obtainStyledAttributes(attrs, R.styleable.AppBarLayout, 0, R.style.AppBarLayout)
+        targetElevation = a.getDimension(R.styleable.AppBarLayout_elevation, 0.0f)
         background = a.getDrawable(R.styleable.AppBarLayout_android_background)
         a.recycle()
 
@@ -129,11 +129,6 @@ class AppBarLayout @JvmOverloads constructor(
         totalScrollRange = INVALID_SCROLL_RANGE
         downPreScrollRange = INVALID_SCROLL_RANGE
         downScrollRange = INVALID_SCROLL_RANGE
-
-        for (i in 0 until childCount) {
-            val child = getChildAt(i)
-            val lp = child.layoutParams as LayoutParams
-        }
     }
 
     /**
