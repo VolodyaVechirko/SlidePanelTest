@@ -42,7 +42,9 @@ public class FitWindowFrameLayout extends FrameLayout {
         super(context, attrs, defStyleAttr);
 
 //        mStatusBarBackground = new ColorDrawable(Color.MAGENTA);
-        setupForInsets();
+        if (Build.VERSION.SDK_INT >= 21) {
+            setupForInsets();
+        }
     }
 
     @Override
@@ -199,10 +201,6 @@ public class FitWindowFrameLayout extends FrameLayout {
     }
 
     private void setupForInsets() {
-        if (Build.VERSION.SDK_INT < 21) {
-            return;
-        }
-
         if (ViewCompat.getFitsSystemWindows(this)) {
             if (mApplyWindowInsetsListener == null) {
                 mApplyWindowInsetsListener = new androidx.core.view.OnApplyWindowInsetsListener() {

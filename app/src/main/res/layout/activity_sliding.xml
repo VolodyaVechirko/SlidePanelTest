@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vvechirko.slidepaneltest.sliding.SlidingContainer
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:tools="http://schemas.android.com/tools"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		tools:context=".MainActivity">
+<com.vvechirko.slidepaneltest.sliding.SlidingContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-	<TextView
-			android:layout_width="match_parent"
-			android:layout_height="300dp"
-			android:text="Hello World!"
-			android:gravity="center"
-			app:layout_viewType="header"
-			android:layout_gravity="top"
-			android:background="@android:color/holo_blue_bright"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="top"
+        android:background="@android:color/holo_blue_bright"
+        android:gravity="center"
+        android:text="Hello World!"
+        app:layout_viewType="header" />
 
-	<androidx.cardview.widget.CardView
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_margin="16dp"
-			app:layout_viewType="panel"
-			android:layout_gravity="bottom"
-			app:cardCornerRadius="8dp"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:layout_viewType="panel">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="24dp"
+                android:text="@string/lorem"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.cardview.widget.CardView>
 
 </com.vvechirko.slidepaneltest.sliding.SlidingContainer>

@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-		xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:orientation="vertical"
-		android:layout_width="match_parent"
-		android:fitsSystemWindows="false"
-		android:layout_height="match_parent">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false">
 
-	<com.vvechirko.slidepaneltest.appbar.AppBarLayout
-			android:id="@+id/appBarLayout"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:fitsSystemWindows="true"
-			android:elevation="4dp"
-			app:layout_behavior="@string/app_bap_behaviour">
+    <com.vvechirko.slidepaneltest.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:fitsSystemWindows="true"
+        app:layout_behavior="@string/app_bap_behaviour">
 
-		<ImageView
-				android:layout_width="match_parent"
-				android:layout_height="200dp"
-				android:scaleType="centerInside"
-				app:layout_scrollFlags="scroll"
-				android:src="@android:drawable/sym_def_app_icon"
-				android:background="@android:color/holo_blue_bright"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@android:color/holo_blue_bright"
+            android:scaleType="centerInside"
+            android:src="@android:drawable/sym_def_app_icon"
+            app:layout_scrollFlags="scroll" />
 
-	</com.vvechirko.slidepaneltest.appbar.AppBarLayout>
+    </com.vvechirko.slidepaneltest.appbar.AppBarLayout>
 
-	<androidx.core.widget.NestedScrollView
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			app:layout_behavior="@string/app_bap_scrolling_view_behaviour">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/app_bap_scrolling_view_behaviour">
 
-		<TextView
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:text="@string/lorem"
-				android:padding="24dp"
-				android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="24dp"
+            android:text="@string/lorem"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-	</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

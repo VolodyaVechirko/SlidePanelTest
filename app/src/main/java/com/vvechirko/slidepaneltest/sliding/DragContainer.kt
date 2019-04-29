@@ -19,11 +19,6 @@ class DragContainer @JvmOverloads constructor(
     private var collapsedPanelMargin = 0
     private var expandedPanelMargin = -1
 
-    private var isAnimating = false
-
-    val velocityThreshold = 1500f * resources.displayMetrics.density
-    val touchSlop = ViewConfiguration.get(context).scaledTouchSlop
-
     val dragCallback = object : ViewDragHelper.Callback() {
 
         var initTop: Int = 0

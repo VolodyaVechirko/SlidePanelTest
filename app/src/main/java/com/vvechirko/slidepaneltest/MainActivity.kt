@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.vvechirko.slidepaneltest.appbar.AppBarActivity
 import com.vvechirko.slidepaneltest.graph.GraphActivity
+import com.vvechirko.slidepaneltest.slide.SlideBehaviourActivity
 import com.vvechirko.slidepaneltest.sliding.SlidingActivity
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +33,10 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<View>(R.id.btn5).setOnClickListener {
             startActivity(Intent(this, AppBarActivity::class.java))
+        }
+
+        findViewById<View>(R.id.btn6).setOnClickListener {
+            startActivity(Intent(this, SlideBehaviourActivity::class.java))
         }
     }
 }
