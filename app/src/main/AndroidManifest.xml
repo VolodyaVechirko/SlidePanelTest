@@ -40,6 +40,10 @@
             android:name=".graph.GraphActivity"
             android:theme="@android:style/Theme.Material.Light" />
 
+        <activity
+            android:name=".motion.MotionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
