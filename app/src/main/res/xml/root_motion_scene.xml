@@ -8,7 +8,7 @@
 
         <OnSwipe
             app:dragDirection="dragUp"
-            app:touchAnchorId="@+id/recyclerView"
+            app:touchAnchorId="@id/dragContent"
             app:touchAnchorSide="top" />
 
     </Transition>
@@ -16,7 +16,7 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/appBar"
+            android:id="@id/appBar"
             android:layout_height="200dp"
             android:layout_width="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,21 +29,13 @@
 
         </Constraint>
 
-        <Constraint
-            android:id="@+id/recyclerView"
-            android:layout_height="0dp"
-            android:layout_width="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:id="@+id/appBar"
+            android:id="@id/appBar"
             android:layout_height="56dp"
             android:layout_width="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,15 +47,6 @@
                 app:customFloatValue="1.0" />
 
         </Constraint>
-
-        <Constraint
-            android:id="@+id/recyclerView"
-            android:layout_height="0dp"
-            android:layout_width="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
     </ConstraintSet>
 

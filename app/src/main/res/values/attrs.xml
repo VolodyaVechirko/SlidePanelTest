@@ -62,4 +62,9 @@
 		<attr name="behavior_overlapView" format="integer" />
 	</declare-styleable>
 
+	<declare-styleable name="MotionRoot">
+		<attr name="appBarMaxHeight" format="dimension|reference" />
+		<attr name="appBarMinHeight" format="dimension|reference" />
+	</declare-styleable>
+
 </resources>

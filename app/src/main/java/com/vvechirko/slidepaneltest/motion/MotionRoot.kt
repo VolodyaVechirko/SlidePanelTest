@@ -19,12 +19,19 @@ class MotionRoot(context: Context, attrs: AttributeSet?) : MotionLayout(context,
     private var drawStatusBarBackground: Boolean = false
     private var statusBarBackground: Drawable? = null
 
+    private var appBarMinHeight: Int = -1
+    private var appBarMaxHeight: Int = -1
+
     init {
         val value = TypedValue()
-        context.theme.resolveAttribute(R.attr.colorPrimaryDark, value, true)
+        context.theme.resolveAttribute(R.attr.colorPrimary, value, true)
         val colorPrimaryDark = value.data
-
         statusBarBackground = ColorDrawable(colorPrimaryDark)
+
+        val a = context.obtainStyledAttributes(attrs, R.styleable.MotionRoot)
+        appBarMaxHeight = a.getDimensionPixelSize(R.styleable.MotionRoot_appBarMaxHeight, -1)
+        appBarMinHeight = a.getDimensionPixelSize(R.styleable.MotionRoot_appBarMinHeight, -1)
+        a.recycle()
         setupForInsets()
     }
 
@@ -35,11 +42,11 @@ class MotionRoot(context: Context, attrs: AttributeSet?) : MotionLayout(context,
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        if (lastInsets == null && ViewCompat.getFitsSystemWindows(this)) {
+//        if (lastInsets == null && ViewCompat.getFitsSystemWindows(this)) {
             // We're set to fitSystemWindows but we haven't had any insets yet...
             // We should request a new dispatch of window insets
 //            ViewCompat.requestApplyInsets(this)
-        }
+//        }
     }
 
     private fun setWindowInsets(insets: WindowInsetsCompat): WindowInsetsCompat {
@@ -47,27 +54,38 @@ class MotionRoot(context: Context, attrs: AttributeSet?) : MotionLayout(context,
             lastInsets = insets
 
             val topInset = insets.systemWindowInsetTop
-            val appBar = findViewById<MotionLayout>(R.id.appBar)
+//            val leftInset = insets.systemWindowInsetLeft
+//            val rightInset = insets.systemWindowInsetRight
+//            val bottomInset = insets.systemWindowInsetBottom
+
+            val appBar = findViewById<MotionAppBar>(R.id.appBar)
             if (ViewCompat.getFitsSystemWindows(appBar)) {
 
                 // add [topInset] to end [ConstraintSet] of appBar
                 val endAppBar = getConstraintSet(R.id.end).getParameters(R.id.appBar)
+                if (appBarMinHeight != -1) {
+                    endAppBar.layout.mHeight = appBarMinHeight
+                }
                 endAppBar.layout.mHeight += topInset
 
                 // add [topInset] to start [ConstraintSet] of appBar
                 val startAppBar = getConstraintSet(R.id.start).getParameters(R.id.appBar)
+                if (appBarMaxHeight != -1) {
+                    startAppBar.layout.mHeight = appBarMaxHeight
+                }
                 startAppBar.layout.mHeight += topInset
 
-//                appBar.setPadding(0, topInset, 0, 0)
-
+                // padding is wrong displayed!
+//                appBar.setPadding(leftInset, topInset, rightInset, bottomInset)
+                appBar.applyInsets(insets)
             } else {
                 // add [topInset] to end [ConstraintSet] of appBar
                 val endAppBar = getConstraintSet(R.id.end).getParameters(R.id.appBar)
-                endAppBar.layout.topMargin += topInset
+                endAppBar.layout.topMargin = topInset
 
                 // add [topInset] to start [ConstraintSet] of appBar
                 val startAppBar = getConstraintSet(R.id.start).getParameters(R.id.appBar)
-                startAppBar.layout.topMargin += topInset
+                startAppBar.layout.topMargin = topInset
 
                 // update [appBar.background] bounds bug
 //                if (statusBarBackground == null) {
@@ -110,4 +128,6 @@ class MotionRoot(context: Context, attrs: AttributeSet?) : MotionLayout(context,
             }
         }
     }
+
+
 }

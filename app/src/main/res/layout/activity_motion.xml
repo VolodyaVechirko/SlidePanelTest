@@ -3,17 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
-    android:id="@+id/motionLayout"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    app:appBarMinHeight="56dp"
+    app:appBarMaxHeight="200dp"
     app:layoutDescription="@xml/root_motion_scene">
 
-    <com.vvechirko.slidepaneltest.motion.CollapsingToolbar
+    <com.vvechirko.slidepaneltest.motion.MotionAppBar
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:fitsSystemWindows="true"
-        android:id="@+id/appBar"
-        android:layout_height="200dp"
+        android:id="@id/appBar"
+        android:layout_height="wrap_content"
         android:layout_width="0dp"
         app:layoutDescription="@xml/appbar_motion_scene">
 
@@ -22,22 +23,22 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Hello world!"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
-    </com.vvechirko.slidepaneltest.motion.CollapsingToolbar>
+    </com.vvechirko.slidepaneltest.motion.MotionAppBar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:background="#FFF"
         android:clipToPadding="false"
-        android:id="@+id/recyclerView"
+        android:id="@id/dragContent"
         android:layout_height="0dp"
         android:layout_width="0dp"
         android:paddingTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
         tools:listitem="@android:layout/simple_expandable_list_item_2" />
 
 </com.vvechirko.slidepaneltest.motion.MotionRoot>

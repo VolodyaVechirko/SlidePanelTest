@@ -14,7 +14,7 @@ class MotionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_motion)
 
-        findViewById<RecyclerView>(R.id.recyclerView).adapter = Adapter()
+        findViewById<RecyclerView>(R.id.dragContent).adapter = Adapter()
     }
 
     class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
