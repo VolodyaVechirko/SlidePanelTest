@@ -5,8 +5,8 @@
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    app:appBarMinHeight="56dp"
     app:appBarMaxHeight="200dp"
+    app:appBarMinHeight="56dp"
     app:layoutDescription="@xml/root_motion_scene">
 
     <com.vvechirko.slidepaneltest.motion.MotionAppBar
@@ -18,12 +18,35 @@
         android:layout_width="0dp"
         app:layoutDescription="@xml/appbar_motion_scene">
 
+        <ImageView
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+            android:id="@+id/btnBack"
+            android:layout_height="56dp"
+            android:layout_width="56dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="?android:attr/homeAsUpIndicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/topInset" />
+
         <TextView
             android:id="@+id/appBarTitle"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Hello world!"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+        <ImageView
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+            android:id="@+id/btnMenu"
+            android:layout_height="56dp"
+            android:layout_width="56dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:tint="?attr/colorControlNormal"
+            android:src="@drawable/ic_android_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/topInset" />
 
     </com.vvechirko.slidepaneltest.motion.MotionAppBar>
 
