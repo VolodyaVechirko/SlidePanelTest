@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.vvechirko.slidepaneltest.R
@@ -27,6 +28,9 @@ class MotionActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             holder.itemView.findViewById<TextView>(android.R.id.text1).text = "Item $position"
             holder.itemView.findViewById<TextView>(android.R.id.text2).text = "SubItem $position"
+            holder.itemView.setOnClickListener {
+                Toast.makeText(it.context, "Click!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         override fun getItemCount(): Int = 20
