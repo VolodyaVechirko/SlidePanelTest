@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.MotionScene
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.vvechirko.slidepaneltest.R
@@ -72,6 +73,15 @@ class MotionRoot(context: Context, attrs: AttributeSet?) : MotionLayout(context,
                 val startAppBar = getConstraintSet(R.id.start).getParameters(R.id.appBar)
                 if (appBarMaxHeight != -1) {
                     startAppBar.layout.mHeight = appBarMaxHeight
+                }
+
+                if (startAppBar.layout.mHeight == -2) {
+                    appBar.measure(
+                        MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+                        MeasureSpec.makeMeasureSpec(1080, MeasureSpec.AT_MOST)
+                    )
+                    appBar.layoutParams.height = appBar.measuredHeight
+                    startAppBar.layout.mHeight = appBar.measuredHeight
                 }
                 startAppBar.layout.mHeight += topInset
 
