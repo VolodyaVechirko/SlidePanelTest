@@ -1,21 +1,27 @@
 # SlidePanelTest
 
-Sliding view container
+<b>Sliding view container</b>
+  
 trying ViewDragHelper, onTouchEvent + Animator, GestureDetector + Overscroller
 
-GraphView sample (from googlesamples)
+<b>GraphView sample</b> (from googlesamples)
+
 using GestureDetector, Overscroller, Zoomer, EdgeEffects
 
-FitWindowFrameLayout
+<b>FitWindowFrameLayout</b>
+
 applyWindowInsets to FrameLayout and children
 
-AppBarLayout (based on google material lib)
+<b>AppBarLayout</b> (based on google material lib)
+
 custom AppBarLayout + AppBarLayout.Behavior + AppBarLayout.ScrollingViewBehavior
 
-Sliding view behaviour
+<b>Sliding view behaviour</b>
+
 custom SlidingViewBehaviour
 
-Moution AppBar
+<b>Moution AppBar</b>
+
 integrate AppBarLayout behaviour using MotionLayout + SystemWindowInsets
 
 <p float="left">
