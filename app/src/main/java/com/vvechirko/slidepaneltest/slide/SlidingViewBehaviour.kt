@@ -11,6 +11,7 @@ import com.vvechirko.slidepaneltest.R
 class SlidingViewBehaviour<V : View> : CoordinatorLayout.Behavior<V> {
 
     private var overlapView: Int = View.NO_ID
+    private var overlapTop: Int = 0
     private var minOffset: Int = 0
     private var maxOffset: Int = 0
     private var curOffset: Int = 0
@@ -23,6 +24,7 @@ class SlidingViewBehaviour<V : View> : CoordinatorLayout.Behavior<V> {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         val a = context.obtainStyledAttributes(attrs, R.styleable.SlidingViewBehavior_Params)
         overlapView = a.getResourceId(R.styleable.SlidingViewBehavior_Params_behavior_overlapView, View.NO_ID)
+        overlapTop = a.getDimensionPixelOffset(R.styleable.SlidingViewBehavior_Params_behavior_overlapTop, 0)
         a.recycle()
     }
 
@@ -49,11 +51,11 @@ class SlidingViewBehaviour<V : View> : CoordinatorLayout.Behavior<V> {
         Log.d("SlidingBehavior", "onMeasureChild $child")
         return parent.getDependencies(child).firstOrNull()?.let { view ->
             // find first dependent view
-            if (view.fitsSystemWindows) {
-                child.fitsSystemWindows = true
+            if (view.fitsSystemWindows) { // TODO: handle fitsSystemWindows
+//                child.fitsSystemWindows = true
             }
 
-            maxOffset = view.measuredHeight
+            maxOffset = view.measuredHeight - overlapTop
             parent.onMeasureChild(
                 child, parentWidthMeasureSpec,
                 widthUsed, parentHeightMeasureSpec, heightUsed
@@ -67,7 +69,7 @@ class SlidingViewBehaviour<V : View> : CoordinatorLayout.Behavior<V> {
         child: V,
         dependency: View
     ): Boolean {
-        Log.d("SlidingBehavior", "onMeasureChild $child")
+        Log.d("SlidingBehavior", "onDependentViewChanged $child")
         return super.onDependentViewChanged(parent, child, dependency)
     }
 
@@ -84,8 +86,8 @@ class SlidingViewBehaviour<V : View> : CoordinatorLayout.Behavior<V> {
         parent: CoordinatorLayout, child: V, target: View,
         dx: Int, dy: Int, consumed: IntArray, type: Int
     ) {
-        Log.d("Behavior", "onNestedPreScroll $child")
-        if (dy != 0 && !skipNestedPreScroll) {
+        Log.d("Behavior", "onNestedPreScroll dy $dy, consumedY ${consumed[1]}")
+        if (dy > 0 && !skipNestedPreScroll) {
             consumed[1] = setTopBottomOffset(child, curOffset - dy)
         }
     }
@@ -94,7 +96,7 @@ class SlidingViewBehaviour<V : View> : CoordinatorLayout.Behavior<V> {
         parent: CoordinatorLayout, child: V, target: View,
         dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int, type: Int
     ) {
-        Log.d("Behavior", "onNestedScroll $child")
+        Log.d("Behavior", "onNestedScroll dyConsumed $dyConsumed, dyUnconsumed $dyUnconsumed")
         if (dyUnconsumed < 0) {
             // If the scrolling view is scrolling down but not consuming, it's probably be at
             // the top of it's content
@@ -116,7 +118,7 @@ class SlidingViewBehaviour<V : View> : CoordinatorLayout.Behavior<V> {
     private fun setTopBottomOffset(child: V, newOffset: Int): Int {
         var offset = newOffset
         var consumed = 0
-        if (minOffset != 0 && curOffset >= minOffset && curOffset <= maxOffset) {
+        if (curOffset >= minOffset && curOffset <= maxOffset) {
             // If we have some scrolling range, and we're currently within the min and max
             // offsets, calculate a new offset
             offset = constrain(offset, minOffset, maxOffset)
